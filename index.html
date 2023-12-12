@@ -1,0 +1,57 @@
+import React, { useState } from 'react';
+
+enum Tab {
+  Calendar = 'Календарь',
+  Mail = 'Почта',
+  Metrics = 'Метрики',
+  Tasks = 'Задачи',
+  Reports = 'Отчеты',
+  Registries = 'Реестры',
+  Directives = 'Предписания',
+  Execution = 'Выполнение',
+}
+
+const Dashboard: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<Tab>(Tab.Calendar);
+
+  const handleTabChange = (tab: Tab) => {
+    setActiveTab(tab);
+  };
+
+  return (
+    <div>
+      <h1>Веб-дэшборд</h1>
+
+      <div>
+        <ul>
+          {Object.values(Tab).map((tab) => (
+            <li
+              key={tab}
+              onClick={() => handleTabChange(tab as Tab)}
+              style={{
+                cursor: 'pointer',
+                fontWeight: tab === activeTab ? 'bold' : 'normal',
+                textDecoration: tab === activeTab ? 'underline' : 'none',
+              }}
+            >
+              {tab}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        {activeTab === Tab.Calendar && <p>Содержимое вкладки "Календарь"</p>}
+        {activeTab === Tab.Mail && <p>Содержимое вкладки "Почта"</p>}
+        {activeTab === Tab.Metrics && <p>Содержимое вкладки "Метрики"</p>}
+        {activeTab === Tab.Tasks && <p>Содержимое вкладки "Задачи"</p>}
+        {activeTab === Tab.Reports && <p>Содержимое вкладки "Отчеты"</p>}
+        {activeTab === Tab.Registries && <p>Содержимое вкладки "Реестры"</p>}
+        {activeTab === Tab.Directives && <p>Содержимое вкладки "Предписания"</p>}
+        {activeTab === Tab.Execution && <p>Содержимое вкладки "Выполнение"</p>}
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
